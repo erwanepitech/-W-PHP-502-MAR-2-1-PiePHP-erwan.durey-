@@ -1,0 +1,20 @@
+<?php
+define('BASE_URI', str_replace('\\', '/', substr(__DIR__, strlen($_SERVER['DOCUMENT_ROOT']))));
+require_once("Core/autoload.php");
+$app = new Core\Core();
+$uri = $_SERVER["REQUEST_URI"];
+$url = substr($uri, 7, strlen($uri));
+// preg_match('/(%.*)/', $url, $matches);
+// array_shift($matches);
+// $url = str_replace();
+// $url = substr($url, 0, strlen($matches[0]) + 1);
+// echo "<pre>";
+// echo $url . PHP_EOL;
+preg_match('/B(.*)%/', $url, $matches_1);
+preg_match('/(%.*D)/', $url, $matches_2);
+array_shift($matches_1);
+array_shift($matches_2);
+// echo str_replace($matches_2[0], "{" . $matches_1[0] . "}", $url);
+$url = str_replace($matches_2[0], "{" . $matches_1[0] . "}", $url);
+// echo "</pre>";
+$app->run($url);
